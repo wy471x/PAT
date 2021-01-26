@@ -21,39 +21,54 @@
 /*
     算法思想：
 */
-#include <iostream>
-#include <cstdio>
+// 自己写的算法有两个测试点超时
+// #include <iostream>
+// #include <cstdio>
+// using namespace std;
+
+// float SumForFragment(int start, int max_distance, float nums[]);
+
+// int main(void) {
+//     int n;
+//     scanf("%d", &n);
+//     int i = 0;
+//     float nums[n];
+//     while (i < n) {
+//         scanf("%f", &nums[i++]);
+//     }
+//     int max_distance = 1;
+//     float sum = 0.0;
+//     for (int i = 0; max_distance <= n;) {
+//         sum += SumForFragment(i, max_distance, nums);
+//         if (i + max_distance >= n) {
+//             i = 0;
+//             max_distance++;
+//         } else {
+//             i++;
+//         }
+//     }
+//     printf("%.2f\n", sum);
+//     return 0;
+// }
+
+// float SumForFragment(int start, int max_distance, float nums[]) {
+//     float res = 0;
+//     for (int i = start; i < start + max_distance; i++) {
+//         res += nums[i];
+//     }
+//     return res;
+// }
+#include<iostream>
 using namespace std;
-
-float SumForFragment(int start, int max_distance, float nums[]);
-
-int main(void) {
-    int n;
-    scanf("%d", &n);
-    int i = 0;
-    float nums[n];
-    while (i < n) {
-        scanf("%f", &nums[i++]);
-    }
-    int max_distance = 1;
-    float sum = 0.0;
-    for (int i = 0; max_distance <= n;) {
-        sum += SumForFragment(i, max_distance, nums);
-        if (i + max_distance >= n) {
-            i = 0;
-            max_distance++;
-        } else {
-            i++;
-        }
-    }
-    printf("%.2f\n", sum);
-    return 0;
-}
-
-float SumForFragment(int start, int max_distance, float nums[]) {
-    float res = 0;
-    for (int i = start; i < start + max_distance; i++) {
-        res += nums[i];
-    }
-    return res;
-}
+double sum[100005];
+int main(){
+	int n;
+	cin>>n;
+	double s=0;
+	for(int i=0;i<n;i++){
+		cin>>sum[i];
+		s+=sum[i]*(i+1)*(n-i);
+	} 
+	printf("%.2f",s);
+	return 0;
+} 
