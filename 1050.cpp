@@ -25,12 +25,23 @@
 */
 #include <iostream>
 #include <cstdio>
+#include <map>
 using namespace std;
 
 int main(void) {
     int n;
     scanf("%d", &n);
-    
+    int nums[n];
+    int i = 0;
+    while (i < n) {
+        scanf("%d", nums[i++]);
+    }
+
 
     return 0;
 }
+
+map<int, pair<int, int>> gapValuePair(int n) {
+    
+}
+
