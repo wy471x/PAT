@@ -25,23 +25,54 @@
 */
 #include <iostream>
 #include <cstdio>
-#include <map>
+#include <algorithm>
+#include <cmath>
+
 using namespace std;
 
 int main(void) {
-    int n;
-    scanf("%d", &n);
-    int nums[n];
+    int N;
+    scanf("%d", &N);
+    int nums[N];
     int i = 0;
-    while (i < n) {
+    while (i < N) {
         scanf("%d", nums[i++]);
     }
+    sort(nums, nums + N);
+    reverse(nums, nums + N);
+    int m = 0, n = 0;
+    for (i = sqrt(N); i <= N; ++i) {
+        if (N % i == 0) {
+            m = i > sqrt(N) ? i : N / i;
+            n = N / m;
+            break;
+        }
+    }
+    cout << m << " "<< n << endl;
+    int j, k = -1, a[m][n];
+    for (i = 0; k < m * n - 1; ++i) {
+        for (j = i; j < n - i && k < m * n - 1; ++j) {
+            a[i][j] = nums[++k];
+        }
+        for (j = i + 1; j < m - i && k < m * n - 1; ++j) {
+            a[j][n - i - 1] = nums[++k];
+        }
+        for (j = m - 2 - i; j >= i + 1 && k < m * n - 1; --j) {
+            a[m - i - 1][j] = nums[++k];
+        }
+        for (j = m - 2 - i; j >= i + 1 && k < m * n - 1; --j) {
+            a[j][i] = nums[++k];
+        }
+    }
 
-
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            printf("%d", a[i][j]);
+            if (j != N - 1) {
+                printf(" ");
+            }
+            printf("\n");
+        }
+    }
     return 0;
 }
-
-map<int, pair<int, int>> gapValuePair(int n) {
-    
-}
-
