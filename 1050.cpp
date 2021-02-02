@@ -36,11 +36,13 @@ int main(void) {
     int nums[N];
     int i = 0;
     while (i < N) {
-        scanf("%d", nums[i++]);
+        scanf("%d", &nums[i++]);
     }
+    // 排序后进行翻转，变为从大到小排序
     sort(nums, nums + N);
     reverse(nums, nums + N);
     int m = 0, n = 0;
+    // 计算差值最小的行列对
     for (i = sqrt(N); i <= N; ++i) {
         if (N % i == 0) {
             m = i > sqrt(N) ? i : N / i;
@@ -48,31 +50,36 @@ int main(void) {
             break;
         }
     }
-    cout << m << " "<< n << endl;
+    // cout << m << " "<< n << endl;
     int j, k = -1, a[m][n];
+    // 螺旋填入数组
     for (i = 0; k < m * n - 1; ++i) {
+        // 填入上方数据
         for (j = i; j < n - i && k < m * n - 1; ++j) {
             a[i][j] = nums[++k];
         }
+        // 填入右方数据
         for (j = i + 1; j < m - i && k < m * n - 1; ++j) {
             a[j][n - i - 1] = nums[++k];
         }
-        for (j = m - 2 - i; j >= i + 1 && k < m * n - 1; --j) {
+        // 填入下方数据
+        for (j = n - 2 - i; j >= i && k < m * n - 1; --j) {
             a[m - i - 1][j] = nums[++k];
         }
+        // 填入左方数据
         for (j = m - 2 - i; j >= i + 1 && k < m * n - 1; --j) {
             a[j][i] = nums[++k];
         }
     }
 
-    for (int i = 0; i < m; ++i) {
-        for (int j = 0; j < n; ++j) {
+    for (i = 0; i < m; ++i) {
+        for (j = 0; j < n; ++j) {
             printf("%d", a[i][j]);
-            if (j != N - 1) {
+            if (j != n - 1) {
                 printf(" ");
-            }
-            printf("\n");
+            }    
         }
+        printf("\n");
     }
     return 0;
 }
